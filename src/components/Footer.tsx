@@ -21,8 +21,8 @@ export function Footer() {
       <div className="container-px grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2 font-semibold">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-sm font-bold text-white">
-              P
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-xs font-bold tracking-tight text-white">
+              LT
             </span>
             LinkTranscript
           </div>

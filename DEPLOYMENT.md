@@ -46,8 +46,22 @@ gh repo create linktranscript --private --source=. --remote=origin
 
 ## 2. Push the code
 
-The project is already a git repo with a clean initial commit (see the bottom of
-this file if you need to recreate it). Connect the remote and push:
+The project is already a git repo with a clean initial commit on `main`.
+
+> **One-time cleanup (do this first):** the initial commit was created in a
+> sandbox whose filesystem couldn't remove git's temporary lock files. Before
+> running any git command on your machine, delete them:
+>
+> ```bash
+> cd MirthCode/linktranscript
+> rm -f .git/HEAD.lock .git/index.lock .git/objects/**/tmp_obj_* 2>/dev/null
+> git status   # should print "nothing to commit, working tree clean"
+> ```
+>
+> If `git status` already works cleanly, you're good. If git ever says
+> *"Unable to create '.git/index.lock': File exists"*, re-run the `rm -f` above.
+
+Connect the remote and push:
 
 ```bash
 # Use the URL from step 1. SSH:

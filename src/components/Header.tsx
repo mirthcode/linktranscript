@@ -5,8 +5,8 @@ export function Header() {
     <header className="sticky top-0 z-30 border-b border-neutral-200 bg-white/80 backdrop-blur">
       <div className="container-px flex h-14 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-sm font-bold text-white">
-            P
+          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-xs font-bold tracking-tight text-white">
+            LT
           </span>
           <span>LinkTranscript</span>
         </Link>

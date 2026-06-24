@@ -35,6 +35,19 @@ export const config = {
   youtube: {
     proxyUrl: process.env.YOUTUBE_PROXY_URL || "",
   },
+
+  // Hosted transcript provider (TranscriptAPI). When a key is present, the
+  // extraction service uses it instead of direct YouTube fetching — this is what
+  // makes extraction work in production, where YouTube blocks datacenter IPs.
+  transcriptApi: {
+    key: process.env.TRANSCRIPTAPI_KEY || "",
+    baseUrl:
+      process.env.TRANSCRIPTAPI_BASE_URL ||
+      "https://transcriptapi.com/api/v2/youtube",
+    get enabled() {
+      return this.key.length > 0;
+    },
+  },
 } as const;
 
 /** Public-safe flags that can be sent to the client. */

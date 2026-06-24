@@ -5,20 +5,23 @@ import {
   TranscriptSegment,
   VideoMeta,
 } from "@/lib/types";
+import { config } from "@/lib/config";
 import { ytFetch } from "./fetcher";
+import { getTranscriptViaApi } from "./transcriptapi";
 import { extractVideoId, thumbnailUrl, watchUrl } from "./url";
 
 /**
  * Transcript extraction service.
  *
- * Strategy (mirrors how public transcript tools work):
- *   1. Load the watch page, pull `ytInitialPlayerResponse` JSON.
- *   2. Read the caption track list + video details from it.
- *   3. If the watch page is gated, fall back to the InnerTube `player` endpoint.
- *   4. Fetch the chosen caption track as json3 and parse to segments.
+ * Provider selection:
+ *   - If TRANSCRIPTAPI_KEY is set, use the hosted TranscriptAPI provider. This is
+ *     required in production (cloud IPs are blocked by YouTube).
+ *   - Otherwise, fall back to direct extraction (works locally / from residential
+ *     IPs): load the watch page, read the caption track list, fetch the timedtext
+ *     track (with an InnerTube fallback).
  *
- * Everything lives behind `getTranscript()` so the provider can be swapped later
- * (e.g. a hosted transcript API) without touching the rest of the app.
+ * Everything lives behind `getTranscript()` so the provider can be swapped
+ * without touching the rest of the app.
  */
 
 interface RawCaptionTrack {
@@ -53,6 +56,18 @@ export interface GetTranscriptOptions {
 }
 
 export async function getTranscript(
+  input: string,
+  options: GetTranscriptOptions = {},
+): Promise<TranscriptResult> {
+  // Preferred path in production: hosted provider with residential proxies.
+  if (config.transcriptApi.enabled) {
+    return getTranscriptViaApi(input);
+  }
+  return getTranscriptDirect(input, options);
+}
+
+/** Direct YouTube extraction (used locally / when no hosted provider is set). */
+async function getTranscriptDirect(
   input: string,
   options: GetTranscriptOptions = {},
 ): Promise<TranscriptResult> {

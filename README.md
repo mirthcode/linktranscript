@@ -64,6 +64,8 @@ npm run lint       # Next.js lint
 | ----------------------------- | --------------------------- | --------------------------------------------------------- |
 | `NEXT_PUBLIC_SITE_URL`        | `https://linktranscript.com`| Canonical site URL for SEO / sitemap / OpenGraph.         |
 | `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | _(empty)_                 | AdSense publisher ID (e.g. `ca-pub-…`). When empty, no ad code loads and no placeholder boxes ship to production. |
+| `TRANSCRIPTAPI_KEY`           | _(empty)_                   | **Required in production.** Key for [TranscriptAPI](https://transcriptapi.com). When set, extraction goes through their residential-proxy infrastructure (YouTube blocks datacenter IPs, so direct extraction fails on Vercel). Empty locally = direct extraction. |
+| `TRANSCRIPTAPI_BASE_URL`      | TranscriptAPI default       | Optional base-URL override for the provider. |
 | `ENABLE_PERSONAL_DOWNLOADS`   | `false`                     | Personal media-download functionality (see below). Keep false. |
 | `ENABLE_TRANSCRIPT_CACHE`     | `true`                      | In-memory transcript cache (30-min TTL).                  |
 | `YOUTUBE_PROXY_URL`           | _(empty)_                   | Optional proxy for YouTube requests (see "Production").   |
