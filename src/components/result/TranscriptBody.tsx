@@ -61,7 +61,7 @@ export function TranscriptBody({
                 {showTimestamps && (
                   <button
                     onClick={() => onSeek(seg.start)}
-                    className="mt-0.5 shrink-0 rounded bg-accent-soft px-1.5 py-0.5 font-mono text-xs text-accent hover:bg-accent hover:text-white"
+                    className="mt-0.5 shrink-0 rounded bg-accent-soft px-2 py-1 font-mono text-xs text-accent hover:bg-accent hover:text-white"
                     title="Jump to this moment"
                   >
                     {formatTimestamp(seg.start)}
@@ -70,10 +70,11 @@ export function TranscriptBody({
                 <p className="flex-1 leading-relaxed text-neutral-800">
                   {highlight(seg.text, query)}
                 </p>
+                {/* Always visible on touch; hover-reveal on desktop */}
                 <button
                   onClick={() => copyQuote(seg.text)}
-                  className="mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-xs text-neutral-400 opacity-0 transition hover:bg-neutral-200 hover:text-ink group-hover/row:opacity-100"
-                  title="Copy this quote"
+                  className="mt-0.5 shrink-0 rounded px-2 py-1 text-xs text-neutral-400 transition hover:bg-neutral-200 hover:text-ink sm:opacity-0 sm:group-hover/row:opacity-100"
+                  title="Copy this line"
                 >
                   Copy
                 </button>

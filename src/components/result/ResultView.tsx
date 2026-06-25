@@ -99,14 +99,14 @@ function ReadyState({
     );
   }, [query, segments]);
 
-  async function doCopy(withTs: boolean) {
+  // Primary "Copy transcript" — respects the Timestamps toggle.
+  async function copyPrimary() {
+    const withTs = showTimestamps;
     const text = result.segments
-      .map((s) =>
-        withTs ? `[${fmt(s.start)}] ${s.text}` : s.text,
-      )
+      .map((s) => (withTs ? `[${fmt(s.start)}] ${s.text}` : s.text))
       .join(withTs ? "\n" : " ");
     if (await copyText(text)) {
-      setCopied(withTs ? "ts" : "clean");
+      setCopied("main");
       track("copy_clicked", { withTimestamps: withTs });
       setTimeout(() => setCopied(""), 1500);
     }
@@ -183,53 +183,69 @@ function ReadyState({
         </div>
 
         {/* Toolbar */}
-        <div className="mt-6 card p-4">
-          <div className="flex flex-wrap items-center gap-2">
-            <button onClick={() => doCopy(true)} className="btn-ghost btn-sm">
-              {copied === "ts" ? "Copied!" : "Copy with timestamps"}
+        <div className="mt-6 card space-y-4 p-4">
+          {/* Primary actions — clear and thumb-friendly */}
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <button
+              onClick={copyPrimary}
+              className="btn-primary w-full justify-center py-3 text-base sm:flex-1"
+            >
+              {copied === "main" ? "✓ Copied!" : "Copy transcript"}
             </button>
-            <button onClick={() => doCopy(false)} className="btn-ghost btn-sm">
-              {copied === "clean" ? "Copied!" : "Copy clean text"}
+            <button
+              onClick={() => setShowTimestamps(!showTimestamps)}
+              aria-pressed={showTimestamps}
+              className={`btn w-full justify-center py-3 text-base sm:w-auto ${
+                showTimestamps
+                  ? "border border-accent bg-accent-soft text-accent"
+                  : "border border-neutral-200 bg-white text-neutral-700"
+              }`}
+            >
+              Timestamps: {showTimestamps ? "On" : "Off"}
             </button>
-            <button onClick={copySelection} className="btn-ghost btn-sm">
+          </div>
+
+          {/* Secondary: copy selection + exports */}
+          <div className="flex flex-col gap-3 border-t border-neutral-100 pt-3 sm:flex-row sm:items-center sm:justify-between">
+            <button
+              onClick={copySelection}
+              className="btn-ghost w-full justify-center py-2.5 sm:w-auto"
+            >
               {copied === "sel"
-                ? "Copied!"
+                ? "✓ Copied selection"
                 : copied === "nosel"
                   ? "Select text first"
-                  : "Copy selection"}
+                  : "Copy selected text"}
             </button>
-            <span className="mx-1 h-5 w-px bg-neutral-200" />
-            {(["txt", "md", "srt", "vtt"] as ExportFormat[]).map((f) => (
-              <button
-                key={f}
-                onClick={() => doExport(f)}
-                className="btn-ghost btn-sm uppercase"
-              >
-                {f}
-              </button>
-            ))}
-            <span className="ml-auto flex items-center gap-2 text-sm text-neutral-600">
-              <input
-                type="checkbox"
-                checked={showTimestamps}
-                onChange={(e) => setShowTimestamps(e.target.checked)}
-                className="h-4 w-4 accent-accent"
-              />
-              Timestamps
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-neutral-400">
+                Export
+              </span>
+              <div className="grid flex-1 grid-cols-4 gap-2 sm:flex">
+                {(["txt", "md", "srt", "vtt"] as ExportFormat[]).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => doExport(f)}
+                    className="btn-ghost justify-center py-2.5 text-xs font-medium uppercase"
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Search */}
-          <div className="mt-3 flex items-center gap-2">
+          <div className="flex items-center gap-2 border-t border-neutral-100 pt-3">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search within transcript…"
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+              className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-base outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
             {query && (
               <span className="shrink-0 text-xs text-neutral-500">
-                {matchCount} match{matchCount === 1 ? "" : "es"}
+                {matchCount}
               </span>
             )}
           </div>
