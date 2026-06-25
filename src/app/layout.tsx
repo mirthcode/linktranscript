@@ -4,6 +4,7 @@ import { config } from "@/lib/config";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageView } from "@/components/PageView";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const DESCRIPTION =
@@ -49,6 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col">
+        <GoogleAnalytics />
         <PageView />
         <Header />
         <main className="flex-1">{children}</main>

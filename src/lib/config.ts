@@ -16,6 +16,10 @@ export const config = {
   // Empty in v1 — real ad code only renders once this is set (post-approval).
   adsenseClientId: process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "",
 
+  // Google Analytics 4 Measurement ID, e.g. "G-XXXXXXXXXX". Public by design.
+  // When empty, no analytics scripts load.
+  gaId: process.env.NEXT_PUBLIC_GA_ID || "",
+
   ai: {
     // NOTE: AI transforms are a BACKLOG feature, disabled by default in v1.
     apiKey: process.env.OPENAI_API_KEY || "",

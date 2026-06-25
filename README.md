@@ -63,6 +63,7 @@ npm run lint       # Next.js lint
 | Variable                      | Default                     | Description                                                |
 | ----------------------------- | --------------------------- | --------------------------------------------------------- |
 | `NEXT_PUBLIC_SITE_URL`        | `https://linktranscript.com`| Canonical site URL for SEO / sitemap / OpenGraph.         |
+| `NEXT_PUBLIC_GA_ID`            | _(empty)_                   | Google Analytics 4 Measurement ID (e.g. `G-…`). When empty, no analytics scripts load. Pageviews via GA4 Enhanced Measurement; custom events forwarded from `lib/analytics.ts`. |
 | `NEXT_PUBLIC_ADSENSE_CLIENT_ID` | _(empty)_                 | AdSense publisher ID (e.g. `ca-pub-…`). When empty, no ad code loads and no placeholder boxes ship to production. |
 | `TRANSCRIPTAPI_KEY`           | _(empty)_                   | **Required in production.** Key for [TranscriptAPI](https://transcriptapi.com). When set, extraction goes through their residential-proxy infrastructure (YouTube blocks datacenter IPs, so direct extraction fails on Vercel). Empty locally = direct extraction. |
 | `TRANSCRIPTAPI_BASE_URL`      | TranscriptAPI default       | Optional base-URL override for the provider. |
