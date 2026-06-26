@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BLOG_POSTS } from "@/lib/blog-posts";
 import { SEO_PAGES } from "@/lib/seo-pages";
 
 export const metadata: Metadata = {
   title: "Guides & Tools",
   description:
-    "Guides on getting transcripts, notes, and summaries from videos — plus every LinkTranscript tool in one place.",
+    "Guides on turning videos into transcripts, notes, and summaries — plus every LinkTranscript tool in one place.",
 };
 
 export default function BlogIndexPage() {
@@ -16,20 +17,49 @@ export default function BlogIndexPage() {
           Guides &amp; tools
         </h1>
         <p className="mt-3 text-neutral-600">
-          Every LinkTranscript tool, plus practical guides on turning videos into
-          transcripts, notes, and summaries. Long-form articles are on the way —
-          start with the tools below.
+          Practical guides on getting transcripts, notes, and summaries from
+          videos — plus quick access to every LinkTranscript tool.
         </p>
       </div>
 
-      <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Articles */}
+      <h2 className="mt-12 text-xl font-semibold">Latest guides</h2>
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {BLOG_POSTS.map((post) => (
+          <Link
+            key={post.slug}
+            href={`/blog/${post.slug}`}
+            className="card p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            <p className="text-xs uppercase tracking-wide text-neutral-400">
+              {new Date(post.date).toLocaleDateString("en-US", {
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })}{" "}
+              · {post.readingMinutes} min
+            </p>
+            <h3 className="mt-2 font-semibold leading-snug">{post.title}</h3>
+            <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
+              {post.description}
+            </p>
+            <span className="mt-4 inline-block text-sm font-medium text-accent">
+              Read guide →
+            </span>
+          </Link>
+        ))}
+      </div>
+
+      {/* Tools */}
+      <h2 className="mt-14 text-xl font-semibold">All tools</h2>
+      <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {SEO_PAGES.map((p) => (
           <Link
             key={p.slug}
             href={`/${p.slug}`}
             className="card p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <h2 className="font-semibold">{p.h1}</h2>
+            <h3 className="font-semibold">{p.h1}</h3>
             <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
               {p.metaDescription}
             </p>

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { config } from "@/lib/config";
 import { SEO_PAGES } from "@/lib/seo-pages";
+import { BLOG_POSTS } from "@/lib/blog-posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = config.siteUrl.replace(/\/$/, "");
@@ -19,6 +20,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: now,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+    })),
+    ...BLOG_POSTS.map((p) => ({
+      url: `${base}/blog/${p.slug}`,
+      lastModified: new Date(p.date),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }
