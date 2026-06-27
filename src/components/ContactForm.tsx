@@ -20,13 +20,13 @@ export function ContactForm() {
   }
 
   return (
-    <form onSubmit={submit} className="not-prose space-y-4 rounded-2xl border border-neutral-200 p-6">
+    <form onSubmit={submit} className="not-prose space-y-4 rounded-2xl border border-console-border p-6">
       <div className="grid gap-4 sm:grid-cols-2">
         <input
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Your name"
-          className="rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+          className="rounded-lg border border-console-border px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
         <input
           value={email}
@@ -34,7 +34,7 @@ export function ContactForm() {
           type="email"
           placeholder="you@example.com"
           required
-          className="rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+          className="rounded-lg border border-console-border px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
       </div>
       <textarea
@@ -43,7 +43,7 @@ export function ContactForm() {
         placeholder="How can we help?"
         rows={5}
         required
-        className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+        className="w-full rounded-lg border border-console-border px-3 py-2 text-sm outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
       />
       <button type="submit" className="btn-primary">
         Send message

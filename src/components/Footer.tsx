@@ -17,22 +17,22 @@ const company = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-neutral-200 bg-neutral-50">
+    <footer className="border-t border-console-border bg-console-panel">
       <div className="container-px grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2 font-semibold">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-ink text-xs font-bold tracking-tight text-white">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-white">
               LT
             </span>
             LinkTranscript
           </div>
-          <p className="mt-3 max-w-xs text-sm text-neutral-500">
+          <p className="mt-3 max-w-xs text-sm text-muted">
             Clean transcripts, notes, and summaries from any video — in seconds.
           </p>
         </div>
         <div>
           <h4 className="text-sm font-semibold">Tools</h4>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-500">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             {tools.map((t) => (
               <li key={t.href}>
                 <Link href={t.href} className="hover:text-ink">
@@ -44,7 +44,7 @@ export function Footer() {
         </div>
         <div>
           <h4 className="text-sm font-semibold">Company</h4>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-500">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             {company.map((t) => (
               <li key={t.href}>
                 <Link href={t.href} className="hover:text-ink">
@@ -56,7 +56,7 @@ export function Footer() {
         </div>
         <div>
           <h4 className="text-sm font-semibold">Coming soon</h4>
-          <ul className="mt-3 space-y-2 text-sm text-neutral-400">
+          <ul className="mt-3 space-y-2 text-sm text-muted">
             <li>Playlist transcripts</li>
             <li>Saved history</li>
             <li>API access</li>
@@ -64,8 +64,8 @@ export function Footer() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-neutral-200">
-        <div className="container-px flex flex-col items-center justify-between gap-2 py-6 text-xs text-neutral-500 sm:flex-row">
+      <div className="border-t border-console-border">
+        <div className="container-px flex flex-col items-center justify-between gap-2 py-6 text-xs text-muted sm:flex-row">
           <p>© {new Date().getFullYear()} LinkTranscript. Not affiliated with YouTube.</p>
           <p>You are responsible for ensuring you have rights to exported content.</p>
         </div>

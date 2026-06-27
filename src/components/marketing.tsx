@@ -29,7 +29,7 @@ export function HowItWorks() {
               {s.n}
             </div>
             <h3 className="mt-4 font-semibold">{s.title}</h3>
-            <p className="mt-2 text-sm text-neutral-600">{s.body}</p>
+            <p className="mt-2 text-sm text-neutral-300">{s.body}</p>
           </div>
         ))}
       </div>
@@ -56,7 +56,7 @@ const features = [
 
 export function FeatureGrid() {
   return (
-    <section className="bg-neutral-50 py-16">
+    <section className="bg-console-panel py-16">
       <div className="container-px">
         <h2 className="text-2xl font-semibold sm:text-3xl">
           Everything you need from a transcript tool
@@ -68,7 +68,7 @@ export function FeatureGrid() {
                 <h3 className="font-semibold">{title}</h3>
                 {soon ? <span className="chip">Soon</span> : null}
               </div>
-              <p className="mt-2 text-sm text-neutral-600">{body}</p>
+              <p className="mt-2 text-sm text-neutral-300">{body}</p>
             </div>
           ))}
         </div>
@@ -94,9 +94,9 @@ export function UseCases() {
       </h2>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {useCases.map(([title, body]) => (
-          <div key={title} className="rounded-2xl border border-neutral-200 p-6">
+          <div key={title} className="rounded-2xl border border-console-border p-6">
             <h3 className="font-semibold">{title}</h3>
-            <p className="mt-2 text-sm text-neutral-600">{body}</p>
+            <p className="mt-2 text-sm text-neutral-300">{body}</p>
           </div>
         ))}
       </div>
@@ -115,7 +115,7 @@ const formats = [
 
 export function ExportFormats() {
   return (
-    <section className="bg-ink py-16 text-white">
+    <section className="border-y border-console-border bg-console-panel py-16">
       <div className="container-px">
         <h2 className="text-2xl font-semibold sm:text-3xl">
           Export in the format you actually use
@@ -126,9 +126,9 @@ export function ExportFormats() {
         </p>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {formats.map(([title, body]) => (
-            <div key={title} className="rounded-2xl bg-ink-soft p-6">
+            <div key={title} className="rounded-2xl bg-console-raised p-6">
               <div className="text-lg font-semibold">.{title.toLowerCase()}</div>
-              <p className="mt-2 text-sm text-neutral-400">{body}</p>
+              <p className="mt-2 text-sm text-muted">{body}</p>
             </div>
           ))}
         </div>
@@ -146,8 +146,8 @@ export function TrustBar() {
     "Timestamps you can click to jump the video",
   ];
   return (
-    <div className="border-y border-neutral-200 bg-neutral-50">
-      <div className="container-px flex flex-col items-center gap-2 py-4 text-sm text-neutral-600 sm:flex-row sm:justify-center sm:gap-8">
+    <div className="border-y border-console-border bg-console-panel">
+      <div className="container-px flex flex-col items-center gap-2 py-4 text-sm text-neutral-300 sm:flex-row sm:justify-center sm:gap-8">
         {items.map((i) => (
           <span key={i} className="flex items-center gap-2">
             <span className="text-accent">✓</span>

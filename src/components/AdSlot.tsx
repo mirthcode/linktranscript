@@ -63,28 +63,38 @@ export function AdSlot({
   // Production, ads not yet configured → render nothing.
   if (!isDev && !live) return null;
 
-  // Development → tasteful placeholder so the layout is visible while building.
+  // Development → dark placeholder so the layout is visible while building.
   if (isDev) {
     return (
       <div
-        className={`flex items-center justify-center rounded-xl border border-dashed border-neutral-200 bg-neutral-50 text-xs uppercase tracking-wide text-neutral-400 ${className}`}
+        className={`relative flex items-center justify-center overflow-hidden rounded-xl border border-console-border bg-console-panel ${className}`}
         style={{ minHeight: height }}
         aria-hidden="true"
       >
-        Ad placement
+        <span className="absolute left-2 top-2 mono text-[10px] uppercase tracking-wider text-muted">
+          Advertisement
+        </span>
+        <span className="mono text-xs text-muted/60">ad slot</span>
       </div>
     );
   }
 
-  // Production with a configured AdSense unit.
+  // Production with a configured AdSense unit — labeled, dark container.
   return (
-    <ins
-      className={`adsbygoogle block ${className}`}
-      style={{ display: "block", minHeight: height }}
-      data-ad-client={CLIENT_ID}
-      data-ad-slot={adUnitId}
-      data-ad-format="auto"
-      data-full-width-responsive="true"
-    />
+    <div
+      className={`relative overflow-hidden rounded-xl border border-console-border bg-console-panel ${className}`}
+    >
+      <span className="absolute left-2 top-2 z-10 mono text-[10px] uppercase tracking-wider text-muted">
+        Advertisement
+      </span>
+      <ins
+        className="adsbygoogle block"
+        style={{ display: "block", minHeight: height }}
+        data-ad-client={CLIENT_ID}
+        data-ad-slot={adUnitId}
+        data-ad-format="auto"
+        data-full-width-responsive="true"
+      />
+    </div>
   );
 }

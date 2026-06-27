@@ -38,17 +38,17 @@ export function TranscriptInput({
           inputMode="url"
           placeholder="Paste a YouTube link — e.g. https://youtube.com/watch?v=…"
           aria-label="YouTube URL"
-          className="w-full flex-1 rounded-xl border border-neutral-300 bg-white px-4 py-3.5 text-base outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
+          className="mono w-full flex-1 rounded-xl border border-console-border bg-console-bg px-4 py-3.5 text-base text-ink placeholder:text-muted outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/20"
         />
         <button type="submit" className="btn-primary px-6 py-3.5 text-base">
           Get Transcript
         </button>
       </div>
       {error ? (
-        <p className="mt-2 text-sm text-red-600">{error}</p>
+        <p className="mt-2 text-sm text-red-300">{error}</p>
       ) : (
         !compact && (
-          <p className="mt-3 text-sm text-neutral-500">
+          <p className="mt-3 text-sm text-muted">
             No signup required for single transcripts. Export clean text in seconds.
           </p>
         )

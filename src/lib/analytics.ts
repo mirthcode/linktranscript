@@ -2,15 +2,22 @@
  * Analytics hooks. Forwards events to Google Analytics 4 (gtag) when present.
  * Pageviews are handled by GA4 Enhanced Measurement (incl. SPA route changes),
  * so `page_view` is not re-sent here to avoid double counting.
+ * No paid analytics provider required.
  */
 
 export type AnalyticsEvent =
   | "page_view"
   | "transcript_generated"
-  | "export_clicked"
+  | "transcript_error"
+  | "transcript_rate_limited"
   | "copy_clicked"
-  | "ai_transform_clicked"
-  | "error_encountered";
+  | "export_clicked"
+  | "search_used"
+  | "summary_clicked"
+  | "summary_generated"
+  | "summary_error"
+  | "pwa_install_prompt_seen"
+  | "pwa_installed";
 
 declare global {
   interface Window {
@@ -32,7 +39,6 @@ export function track(
   // GA4 Enhanced Measurement already records page_view (and SPA navigations).
   if (event === "page_view") return;
 
-  // Forward custom events to GA4 if gtag is loaded.
   if (typeof window.gtag === "function") {
     window.gtag("event", event, props);
   }

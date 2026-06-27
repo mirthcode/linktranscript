@@ -50,7 +50,7 @@ export default function SeoLandingPage({
             {page.h1}
           </h1>
           {page.intro.map((p, i) => (
-            <p key={i} className="mx-auto mt-4 max-w-2xl text-neutral-600">
+            <p key={i} className="mx-auto mt-4 max-w-2xl text-neutral-300">
               {p}
             </p>
           ))}
@@ -67,7 +67,7 @@ export default function SeoLandingPage({
             <div key={s.heading}>
               <div>
                 <h2 className="text-xl font-semibold sm:text-2xl">{s.heading}</h2>
-                <p className="mt-3 text-neutral-700">{s.body}</p>
+                <p className="mt-3 text-neutral-300">{s.body}</p>
               </div>
               {i === 0 && (
                 <div className="mt-10">
@@ -99,7 +99,7 @@ export default function SeoLandingPage({
       <section className="container-px pb-16">
         <div className="card bg-accent-soft p-10 text-center">
           <h2 className="text-2xl font-semibold">Try it on your video</h2>
-          <p className="mx-auto mt-2 max-w-xl text-neutral-600">
+          <p className="mx-auto mt-2 max-w-xl text-neutral-300">
             Paste a YouTube link and get a clean transcript in seconds.
           </p>
           <div className="mx-auto mt-6 max-w-xl">

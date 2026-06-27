@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { config } from "@/lib/config";
 import { Header } from "@/components/Header";
@@ -7,28 +7,46 @@ import { PageView } from "@/components/PageView";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
+const TITLE = "Free YouTube Transcript Generator — LinkTranscript";
 const DESCRIPTION =
-  "Turn any YouTube video into a clean, exportable transcript with timestamps in seconds. Copy, search, and export as TXT, Markdown, SRT, or VTT. Free, no signup.";
+  "Free YouTube transcript generator. Paste the link, get the transcript — copy clean text, search long videos, and export TXT, MD, SRT, or VTT. No signup.";
+
+export const viewport: Viewport = {
+  themeColor: "#0a0e16",
+  width: "device-width",
+  initialScale: 1,
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(config.siteUrl),
   title: {
-    default: "LinkTranscript — Paste a video. Get the transcript.",
+    default: TITLE,
     template: "%s · LinkTranscript",
   },
   description: DESCRIPTION,
   applicationName: "LinkTranscript",
   keywords: [
     "youtube transcript",
-    "video transcript",
-    "transcript generator",
+    "youtube transcript generator",
     "youtube to text",
     "copy youtube transcript",
     "youtube transcript download",
+    "srt to txt",
+    "vtt to txt",
   ],
   alternates: { canonical: "/" },
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: "/icons/favicon-32.png",
+    apple: "/icons/apple-touch-icon.png",
+  },
+  appleWebApp: {
+    capable: true,
+    title: "LinkTranscript",
+    statusBarStyle: "black-translucent",
+  },
   openGraph: {
-    title: "LinkTranscript — Paste a video. Get the transcript.",
+    title: TITLE,
     description: DESCRIPTION,
     url: config.siteUrl,
     siteName: "LinkTranscript",
@@ -36,7 +54,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "LinkTranscript — Paste a video. Get the transcript.",
+    title: TITLE,
     description: DESCRIPTION,
   },
   robots: { index: true, follow: true },

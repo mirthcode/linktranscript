@@ -5,7 +5,7 @@ export default function NotFound() {
     <section className="container-px py-24 text-center">
       <p className="text-sm font-medium text-accent">404</p>
       <h1 className="mt-2 text-3xl font-bold">Page not found</h1>
-      <p className="mx-auto mt-3 max-w-md text-neutral-600">
+      <p className="mx-auto mt-3 max-w-md text-neutral-300">
         The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get you
         back to transcribing.
       </p>

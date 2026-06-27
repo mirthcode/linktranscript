@@ -47,8 +47,8 @@ export function TranscriptBody({
   return (
     <div>
       {sections.map((section, si) => (
-        <details key={si} open className="group border-b border-neutral-100">
-          <summary className="sticky top-0 z-10 flex cursor-pointer list-none items-center gap-2 bg-white/90 py-2 text-xs font-medium text-neutral-400 backdrop-blur">
+        <details key={si} open className="group border-b border-console-border">
+          <summary className="sticky top-0 z-10 flex cursor-pointer list-none items-center gap-2 bg-console-panel/90 py-2 text-xs font-medium text-muted backdrop-blur">
             <span className="transition group-open:rotate-90">▸</span>
             {formatTimestamp(section.start)} – {formatTimestamp(section.end)}
           </summary>
@@ -56,7 +56,7 @@ export function TranscriptBody({
             {section.segments.map(({ seg, index }) => (
               <div
                 key={index}
-                className="group/row flex items-start gap-3 rounded-lg px-2 py-1.5 hover:bg-neutral-50"
+                className="group/row flex items-start gap-3 rounded-lg px-2 py-1.5 hover:bg-console-raised"
               >
                 {showTimestamps && (
                   <button
@@ -67,13 +67,13 @@ export function TranscriptBody({
                     {formatTimestamp(seg.start)}
                   </button>
                 )}
-                <p className="flex-1 leading-relaxed text-neutral-800">
+                <p className="flex-1 leading-relaxed text-ink">
                   {highlight(seg.text, query)}
                 </p>
                 {/* Always visible on touch; hover-reveal on desktop */}
                 <button
                   onClick={() => copyQuote(seg.text)}
-                  className="mt-0.5 shrink-0 rounded px-2 py-1 text-xs text-neutral-400 transition hover:bg-neutral-200 hover:text-ink sm:opacity-0 sm:group-hover/row:opacity-100"
+                  className="mt-0.5 shrink-0 rounded px-2 py-1 text-xs text-muted transition hover:bg-console-raised hover:text-ink sm:opacity-0 sm:group-hover/row:opacity-100"
                   title="Copy this line"
                 >
                   Copy

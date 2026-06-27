@@ -57,11 +57,11 @@ export default function BlogPostPage({
         <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl">
           {post.title}
         </h1>
-        <p className="mt-3 text-sm text-neutral-500">
+        <p className="mt-3 text-sm text-muted">
           {dateLabel} · {post.readingMinutes} min read
         </p>
 
-        <div className="mt-8 space-y-5 leading-relaxed text-neutral-700">
+        <div className="mt-8 space-y-5 leading-relaxed text-neutral-300">
           {post.body.map((block, i) => {
             if (block.type === "h2")
               return (
@@ -84,7 +84,7 @@ export default function BlogPostPage({
         {/* Inline CTA */}
         <div className="card mt-10 bg-accent-soft p-6">
           <p className="font-semibold text-ink">Try it on a video</p>
-          <p className="mt-1 text-sm text-neutral-600">
+          <p className="mt-1 text-sm text-neutral-300">
             Paste a YouTube link and get a clean, exportable transcript in seconds.
           </p>
           <div className="mt-4">

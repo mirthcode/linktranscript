@@ -15,7 +15,7 @@ export default function ContactPage() {
         hear from you. Send a message below and we&apos;ll get back to you.
       </p>
       <ContactForm />
-      <p className="text-sm text-neutral-500">
+      <p className="text-sm text-muted">
         Prefer email? Reach us at{" "}
         <a href="mailto:hello@linktranscript.com">hello@linktranscript.com</a>.
       </p>

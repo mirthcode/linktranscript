@@ -12,8 +12,8 @@ interface Entry {
   expires: number;
 }
 
-const TTL_MS = 1000 * 60 * 30; // 30 minutes
-const MAX_ENTRIES = 200;
+const TTL_MS = config.limits.cacheTtlDays * 24 * 60 * 60 * 1000;
+const MAX_ENTRIES = 1000;
 const store = new Map<string, Entry>();
 
 function key(videoId: string, lang?: string) {

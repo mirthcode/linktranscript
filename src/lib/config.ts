@@ -8,6 +8,11 @@ function flag(value: string | undefined, fallback: boolean): boolean {
   return value.toLowerCase() === "true" || value === "1";
 }
 
+function num(value: string | undefined, fallback: number): number {
+  const n = Number(value);
+  return Number.isFinite(n) && n > 0 ? n : fallback;
+}
+
 export const config = {
   // Canonical production URL. Override locally with NEXT_PUBLIC_SITE_URL.
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://linktranscript.com",
@@ -34,6 +39,30 @@ export const config = {
     aiTransforms: flag(process.env.ENABLE_AI_TRANSFORMS, true),
     personalDownloads: flag(process.env.ENABLE_PERSONAL_DOWNLOADS, false),
     transcriptCache: flag(process.env.ENABLE_TRANSCRIPT_CACHE, true),
+    summaries: flag(process.env.ENABLE_SUMMARIES, false),
+  },
+
+  // Transcript abuse / cost protection. All limits are per server instance
+  // (in-memory) — good enough for v1; swap for a shared store later. Cloudflare
+  // is the first line of defense; these are the application-level backstop.
+  limits: {
+    transcriptIpHourly: num(process.env.TRANSCRIPT_IP_HOURLY_LIMIT, 30),
+    transcriptIpDaily: num(process.env.TRANSCRIPT_IP_DAILY_LIMIT, 150),
+    transcriptGlobalDaily: num(process.env.TRANSCRIPT_GLOBAL_DAILY_LIMIT, 5000),
+    cacheTtlDays: num(process.env.TRANSCRIPT_CACHE_TTL_DAYS, 30),
+    summaryIpHourly: num(process.env.SUMMARY_IP_HOURLY_LIMIT, 3),
+    summaryIpDaily: num(process.env.SUMMARY_IP_DAILY_LIMIT, 3),
+    summaryGlobalDaily: num(process.env.SUMMARY_GLOBAL_DAILY_LIMIT, 500),
+    summaryMaxChars: num(process.env.SUMMARY_MAX_TRANSCRIPT_CHARS, 48000),
+    summaryCacheTtlDays: num(process.env.SUMMARY_CACHE_TTL_DAYS, 30),
+  },
+
+  // Cloudflare Turnstile (optional). When enabled, the transcript/summary routes
+  // require a valid token. Off by default so normal users never see a challenge.
+  turnstile: {
+    enabled: flag(process.env.ENABLE_CLOUDFLARE_TURNSTILE, false),
+    secretKey: process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY || "",
+    siteKey: process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY || "",
   },
 
   youtube: {

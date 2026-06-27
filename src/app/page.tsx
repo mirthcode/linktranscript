@@ -1,6 +1,7 @@
 import { TranscriptInput } from "@/components/TranscriptInput";
 import { AdSlot } from "@/components/AdSlot";
 import { Faq } from "@/components/Faq";
+import { ConsolePreview } from "@/components/ConsolePreview";
 import {
   ExportFormats,
   FeatureGrid,
@@ -12,7 +13,7 @@ import {
 const faqs = [
   {
     q: "Is LinkTranscript free to use?",
-    a: "Yes. Single transcripts are free and require no signup. Paste a link, get the transcript, and export it instantly.",
+    a: "Yes. Transcripts are free and require no signup. Paste a link, get the transcript, and export it instantly.",
   },
   {
     q: "Which videos work?",
@@ -20,15 +21,15 @@ const faqs = [
   },
   {
     q: "Do you store my transcripts?",
-    a: "No. In this version transcripts are generated on demand and not stored permanently. Saved history is an optional feature coming later.",
+    a: "No. Transcripts are generated on demand and not stored permanently. Saved history is an optional feature for later.",
   },
   {
     q: "Can I get a transcript in another language?",
     a: "If a video has multiple caption tracks, you can pick the language on the result page.",
   },
   {
-    q: "Is this a video downloader?",
-    a: "No. LinkTranscript is a transcript and notes utility. It extracts captions and text — it does not download or rehost video files.",
+    q: "What can I export?",
+    a: "Copy the transcript with or without timestamps, or export it as TXT, Markdown, SRT, or VTT.",
   },
 ];
 
@@ -36,19 +37,29 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section id="tool" className="container-px pt-16 pb-10 sm:pt-24">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="chip">Transcripts · Notes · Summaries</span>
-          <h1 className="mt-5 text-4xl font-bold tracking-tight sm:text-5xl">
-            Paste a video. Get the transcript.
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-neutral-600">
-            Turn YouTube videos into clean transcripts, notes, summaries, and
-            exportable text in seconds.
-          </p>
-        </div>
-        <div className="mx-auto mt-8 max-w-2xl">
-          <TranscriptInput autoFocus />
+      <section id="tool" className="container-px pt-12 pb-10 sm:pt-16">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          {/* Copy + input (first on mobile, so the input stays above the fold) */}
+          <div>
+            <span className="mono text-xs uppercase tracking-widest text-accent">
+              Free YouTube transcript tool
+            </span>
+            <h1 className="mt-4 text-3xl font-bold tracking-tight sm:text-5xl">
+              Free YouTube Transcript Generator
+            </h1>
+            <p className="mt-4 text-lg text-muted">
+              Paste the link. Get the transcript.
+            </p>
+            <p className="mt-2 text-sm text-muted">
+              No signup required. Export TXT, MD, SRT, or VTT.
+            </p>
+            <div className="mt-6">
+              <TranscriptInput autoFocus />
+            </div>
+          </div>
+
+          {/* Console preview */}
+          <ConsolePreview />
         </div>
       </section>
 
@@ -68,11 +79,10 @@ export default function HomePage() {
       <section className="container-px pb-20">
         <div className="card bg-accent-soft p-10 text-center">
           <h2 className="text-2xl font-semibold sm:text-3xl">
-            Ready to transcribe a video?
+            Paste the link. Get the transcript.
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-neutral-600">
-            Paste a YouTube link and get a clean, exportable transcript in
-            seconds.
+          <p className="mx-auto mt-3 max-w-xl text-muted">
+            Free, no signup. Copy clean text or export TXT, MD, SRT, or VTT.
           </p>
           <div className="mx-auto mt-6 max-w-xl">
             <TranscriptInput compact />

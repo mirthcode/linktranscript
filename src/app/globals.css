@@ -4,6 +4,7 @@
 
 :root {
   --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
 }
 
 html {
@@ -11,24 +12,30 @@ html {
 }
 
 body {
-  @apply bg-white text-ink antialiased;
+  @apply bg-console-bg text-ink antialiased;
 }
 
-/* Search highlight */
+/* Monospace accents: timestamps, URLs, status labels, previews */
+.mono {
+  font-family: var(--font-mono, ui-monospace, SFMono-Regular, Menlo, Consolas, monospace);
+}
+
+/* Search highlight (works on dark) */
 mark.ps-hl {
-  @apply rounded bg-yellow-200 px-0.5 text-ink;
+  @apply rounded bg-accent/30 px-0.5 text-ink;
 }
 
-/* Thin, tasteful scrollbars in the transcript pane */
+/* Thin scrollbars in the transcript pane */
 .ps-scroll {
   scrollbar-width: thin;
-  scrollbar-color: #d4d4d4 transparent;
+  scrollbar-color: #2a3650 transparent;
 }
 .ps-scroll::-webkit-scrollbar {
   width: 8px;
 }
 .ps-scroll::-webkit-scrollbar-thumb {
-  @apply rounded-full bg-neutral-300;
+  border-radius: 9999px;
+  background: #2a3650;
 }
 
 @layer components {
@@ -39,18 +46,22 @@ mark.ps-hl {
     @apply btn bg-accent text-white hover:bg-accent-hover;
   }
   .btn-ghost {
-    @apply btn border border-neutral-200 bg-white text-ink hover:bg-neutral-50;
+    @apply btn border border-console-border bg-console-panel text-ink hover:bg-console-raised;
   }
   .btn-sm {
     @apply px-3 py-1.5 text-xs;
   }
   .card {
-    @apply rounded-2xl border border-neutral-200 bg-white shadow-card;
+    @apply rounded-xl border border-console-border bg-console-panel shadow-card;
   }
   .chip {
-    @apply inline-flex items-center rounded-full border border-neutral-200 bg-neutral-50 px-3 py-1 text-xs font-medium text-neutral-600;
+    @apply inline-flex items-center rounded-full border border-console-border bg-console-raised px-3 py-1 text-xs font-medium text-muted;
   }
   .container-px {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+  /* Dark form inputs */
+  .field {
+    @apply w-full rounded-lg border border-console-border bg-console-bg px-4 py-3 text-base text-ink placeholder:text-muted outline-none transition focus:border-accent focus:ring-2 focus:ring-accent/30;
   }
 }

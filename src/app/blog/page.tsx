@@ -16,7 +16,7 @@ export default function BlogIndexPage() {
         <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Guides &amp; tools
         </h1>
-        <p className="mt-3 text-neutral-600">
+        <p className="mt-3 text-neutral-300">
           Practical guides on getting transcripts, notes, and summaries from
           videos — plus quick access to every LinkTranscript tool.
         </p>
@@ -31,7 +31,7 @@ export default function BlogIndexPage() {
             href={`/blog/${post.slug}`}
             className="card p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
           >
-            <p className="text-xs uppercase tracking-wide text-neutral-400">
+            <p className="text-xs uppercase tracking-wide text-muted">
               {new Date(post.date).toLocaleDateString("en-US", {
                 month: "short",
                 day: "numeric",
@@ -40,7 +40,7 @@ export default function BlogIndexPage() {
               · {post.readingMinutes} min
             </p>
             <h3 className="mt-2 font-semibold leading-snug">{post.title}</h3>
-            <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
+            <p className="mt-2 line-clamp-3 text-sm text-neutral-300">
               {post.description}
             </p>
             <span className="mt-4 inline-block text-sm font-medium text-accent">
@@ -60,7 +60,7 @@ export default function BlogIndexPage() {
             className="card p-6 transition hover:-translate-y-0.5 hover:shadow-lg"
           >
             <h3 className="font-semibold">{p.h1}</h3>
-            <p className="mt-2 line-clamp-3 text-sm text-neutral-600">
+            <p className="mt-2 line-clamp-3 text-sm text-neutral-300">
               {p.metaDescription}
             </p>
             <span className="mt-4 inline-block text-sm font-medium text-accent">

@@ -37,7 +37,8 @@ export function ResultView({ url }: { url: string }) {
         if (!res.ok) {
           setErrorMsg(data.error || "Something went wrong.");
           setStatus("error");
-          track("error_encountered", { scope: "transcript", code: data.code });
+          if (data.code === "RATE_LIMITED") track("transcript_rate_limited", {});
+          else track("transcript_error", { code: data.code });
           return;
         }
         setResult(data.result);
@@ -142,7 +143,7 @@ function ReadyState({
           <div>
             <h1 className="text-xl font-semibold leading-snug">{meta.title}</h1>
             {meta.author && (
-              <p className="mt-1 text-sm text-neutral-500">{meta.author}</p>
+              <p className="mt-1 text-sm text-muted">{meta.author}</p>
             )}
             <a
               href={meta.sourceUrl}
@@ -162,13 +163,13 @@ function ReadyState({
             </div>
             {result.availableTracks.length > 1 && (
               <div className="mt-4">
-                <label className="text-xs font-medium text-neutral-500">
+                <label className="text-xs font-medium text-muted">
                   Transcript language
                 </label>
                 <select
                   value={result.language}
                   onChange={(e) => setLang(e.target.value)}
-                  className="mt-1 block rounded-lg border border-neutral-300 px-3 py-2 text-sm"
+                  className="mt-1 block rounded-lg border border-console-border px-3 py-2 text-sm"
                 >
                   {result.availableTracks.map((t) => (
                     <option key={t.languageCode} value={t.languageCode}>
@@ -198,7 +199,7 @@ function ReadyState({
               className={`btn w-full justify-center py-3 text-base sm:w-auto ${
                 showTimestamps
                   ? "border border-accent bg-accent-soft text-accent"
-                  : "border border-neutral-200 bg-white text-neutral-700"
+                  : "border border-console-border bg-console-panel text-neutral-300"
               }`}
             >
               Timestamps: {showTimestamps ? "On" : "Off"}
@@ -206,7 +207,7 @@ function ReadyState({
           </div>
 
           {/* Secondary: copy selection + exports */}
-          <div className="flex flex-col gap-3 border-t border-neutral-100 pt-3 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-3 border-t border-console-border pt-3 sm:flex-row sm:items-center sm:justify-between">
             <button
               onClick={copySelection}
               className="btn-ghost w-full justify-center py-2.5 sm:w-auto"
@@ -218,7 +219,7 @@ function ReadyState({
                   : "Copy selected text"}
             </button>
             <div className="flex items-center gap-2">
-              <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-neutral-400">
+              <span className="shrink-0 text-xs font-medium uppercase tracking-wide text-muted">
                 Export
               </span>
               <div className="grid flex-1 grid-cols-4 gap-2 sm:flex">
@@ -236,15 +237,16 @@ function ReadyState({
           </div>
 
           {/* Search */}
-          <div className="flex items-center gap-2 border-t border-neutral-100 pt-3">
+          <div className="flex items-center gap-2 border-t border-console-border pt-3">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onBlur={() => query.trim() && track("search_used", {})}
               placeholder="Search within transcript…"
-              className="w-full rounded-lg border border-neutral-300 px-3 py-2.5 text-base outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+              className="mono w-full rounded-lg border border-console-border bg-console-bg px-3 py-2.5 text-base text-ink placeholder:text-muted outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
             />
             {query && (
-              <span className="shrink-0 text-xs text-neutral-500">
+              <span className="shrink-0 text-xs text-muted">
                 {matchCount}
               </span>
             )}
@@ -270,7 +272,7 @@ function ReadyState({
 
       {/* Sidebar */}
       <aside className="space-y-6">
-        <div className="card p-4 text-sm text-neutral-600">
+        <div className="card p-4 text-sm text-neutral-300">
           <p className="font-medium text-ink">Transcribe another video</p>
           <p className="mt-1">Paste a new YouTube link to get its transcript.</p>
           <Link href="/#tool" className="btn-primary btn-sm mt-3">
@@ -289,9 +291,9 @@ function LoadingState() {
   return (
     <div className="container-px py-16">
       <div className="mx-auto max-w-md text-center">
-        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-neutral-200 border-t-accent" />
+        <div className="mx-auto h-10 w-10 animate-spin rounded-full border-2 border-console-border border-t-accent" />
         <p className="mt-4 font-medium">Fetching transcript…</p>
-        <p className="mt-1 text-sm text-neutral-500">
+        <p className="mt-1 text-sm text-muted">
           Pulling captions and cleaning them up.
         </p>
       </div>
@@ -302,11 +304,11 @@ function LoadingState() {
 function ErrorState({ message }: { message: string }) {
   return (
     <div className="container-px py-16">
-      <div className="mx-auto max-w-md rounded-2xl border border-red-100 bg-red-50 p-8 text-center">
-        <h1 className="text-lg font-semibold text-red-800">
+      <div className="mx-auto max-w-md rounded-2xl border border-red-900/50 bg-red-950/40 p-8 text-center">
+        <h1 className="text-lg font-semibold text-red-200">
           Couldn&apos;t get that transcript
         </h1>
-        <p className="mt-2 text-sm text-red-700">{message}</p>
+        <p className="mt-2 text-sm text-red-300">{message}</p>
         <Link href="/#tool" className="btn-primary mt-6">
           Try another video
         </Link>
