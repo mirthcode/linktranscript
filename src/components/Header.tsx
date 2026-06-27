@@ -5,9 +5,14 @@ export function Header() {
     <header className="sticky top-0 z-30 border-b border-console-border bg-console-bg/80 backdrop-blur">
       <div className="container-px flex h-14 items-center justify-between">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-white">
-            LT
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/brand/icon-192.png"
+            alt="LinkTranscript"
+            width={28}
+            height={28}
+            className="h-7 w-7 rounded-lg"
+          />
           <span>LinkTranscript</span>
         </Link>
         <nav className="hidden items-center gap-6 text-sm text-neutral-300 sm:flex">

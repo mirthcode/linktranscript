@@ -37,8 +37,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: "/icons/favicon-32.png",
-    apple: "/icons/apple-touch-icon.png",
+    icon: "/brand/favicon.png",
+    apple: "/brand/apple-touch.png",
   },
   appleWebApp: {
     capable: true,
@@ -51,11 +51,13 @@ export const metadata: Metadata = {
     url: config.siteUrl,
     siteName: "LinkTranscript",
     type: "website",
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "LinkTranscript" }],
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
+    images: ["/og.png"],
   },
   robots: { index: true, follow: true },
 };

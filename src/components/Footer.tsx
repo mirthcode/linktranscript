@@ -21,9 +21,14 @@ export function Footer() {
       <div className="container-px grid grid-cols-2 gap-8 py-12 sm:grid-cols-4">
         <div className="col-span-2 sm:col-span-1">
           <div className="flex items-center gap-2 font-semibold">
-            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-white">
-              LT
-            </span>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brand/icon-192.png"
+              alt="LinkTranscript"
+              width={28}
+              height={28}
+              className="h-7 w-7 rounded-lg"
+            />
             LinkTranscript
           </div>
           <p className="mt-3 max-w-xs text-sm text-muted">

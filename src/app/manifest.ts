@@ -13,10 +13,10 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#0a0e16",
     categories: ["productivity", "utilities"],
     icons: [
-      { src: "/icons/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
-      { src: "/icons/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "/brand/icon-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "/brand/icon-512.png", sizes: "512x512", type: "image/png", purpose: "any" },
       {
-        src: "/icons/icon-maskable-512.png",
+        src: "/brand/icon-maskable.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
