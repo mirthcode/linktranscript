@@ -2,6 +2,7 @@ import { TranscriptInput } from "@/components/TranscriptInput";
 import { AdSlot } from "@/components/AdSlot";
 import { Faq } from "@/components/Faq";
 import { ConsolePreview } from "@/components/ConsolePreview";
+import { InstallCta } from "@/components/InstallCta";
 import {
   ExportFormats,
   FeatureGrid,
@@ -55,6 +56,9 @@ export default function HomePage() {
             </p>
             <div className="mt-6">
               <TranscriptInput autoFocus />
+            </div>
+            <div className="mt-4">
+              <InstallCta />
             </div>
           </div>
 

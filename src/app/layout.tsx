@@ -4,6 +4,7 @@ import { config } from "@/lib/config";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { PageView } from "@/components/PageView";
+import { InstallProvider } from "@/components/InstallProvider";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import "./globals.css";
 
@@ -72,6 +73,7 @@ export default function RootLayout({
       <body className="flex min-h-screen flex-col">
         <GoogleAnalytics />
         <PageView />
+        <InstallProvider />
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />

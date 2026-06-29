@@ -9,6 +9,7 @@ const tools = [
 ];
 
 const company = [
+  { href: "/install", label: "Install app" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },
   { href: "/privacy", label: "Privacy Policy" },

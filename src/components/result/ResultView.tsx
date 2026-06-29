@@ -7,6 +7,7 @@ import { exportTranscript, safeFilename } from "@/lib/exporters";
 import { copyText, downloadFile } from "@/lib/browser";
 import { track } from "@/lib/analytics";
 import { AdSlot } from "@/components/AdSlot";
+import { InstallCta } from "@/components/InstallCta";
 import { TranscriptBody } from "./TranscriptBody";
 import { useYouTubePlayer } from "./useYouTubePlayer";
 
@@ -278,6 +279,13 @@ function ReadyState({
           <Link href="/#tool" className="btn-primary btn-sm mt-3">
             New transcript
           </Link>
+        </div>
+        <div className="card p-4 text-sm text-neutral-300">
+          <p className="font-medium text-ink">Use it like an app</p>
+          <p className="mt-1">Add LinkTranscript to your home screen for one-tap access.</p>
+          <div className="mt-3">
+            <InstallCta />
+          </div>
         </div>
         <AdSlot slot="result-sidebar" height={250} className="h-[250px]" />
       </aside>

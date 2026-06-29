@@ -5,7 +5,7 @@ import { BLOG_POSTS } from "@/lib/blog-posts";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = config.siteUrl.replace(/\/$/, "");
-  const staticRoutes = ["", "/blog", "/contact", "/privacy", "/terms"];
+  const staticRoutes = ["", "/blog", "/install", "/contact", "/privacy", "/terms"];
   const now = new Date();
 
   return [

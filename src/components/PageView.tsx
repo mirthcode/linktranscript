@@ -12,16 +12,5 @@ export function PageView() {
     track("page_view", { path: pathname });
   }, [pathname]);
 
-  useEffect(() => {
-    const onPrompt = () => track("pwa_install_prompt_seen", {});
-    const onInstalled = () => track("pwa_installed", {});
-    window.addEventListener("beforeinstallprompt", onPrompt);
-    window.addEventListener("appinstalled", onInstalled);
-    return () => {
-      window.removeEventListener("beforeinstallprompt", onPrompt);
-      window.removeEventListener("appinstalled", onInstalled);
-    };
-  }, []);
-
   return null;
 }
